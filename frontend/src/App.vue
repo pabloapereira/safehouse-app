@@ -36,15 +36,14 @@ export default {
 }
 </script>
 <style>
-form{
-  background-image: url('./assets/img/fundo.jpg');
-  width: 20vw;
-  height: 40vh;
-  text-align: center;
-  padding: 10%;
-}
+  form{
+    width: 20vw;
+    height: 40vh;
+    text-align: center;
+    padding: 10%;
+  }
 
-.inputs {
-  margin-bottom: 4%;
-}
+  .inputs {
+    margin-bottom: 4%;
+  }
 </style>
