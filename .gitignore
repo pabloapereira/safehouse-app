@@ -28,3 +28,8 @@ lerna-debug.log*
 *.sw?
 
 _instructions.md
+backend/tmp/
+backend/config/master.key
+backend/storage/development.sqlite3
+backend/storage/development.sqlite3-shm
+backend/storage/development.sqlite3-wal
