@@ -13,6 +13,8 @@
     width: 163px;
     height: 40px;
     font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    color: #110102;
     background-image: url('../assets/img/fundo-button.png');
     background-color: #f2eccc;
     background-size: cover;
