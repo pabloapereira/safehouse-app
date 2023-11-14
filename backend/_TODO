@@ -1,0 +1,12 @@
+3. Set Up Controllers and Routes:
+
+    Generate controllers for your models and define routes in config/routes.rb.
+
+4. Implement CRUD Operations:
+
+    In your controllers, implement CRUD (Create, Read, Update, Delete) operations.
+
+5. Test Endpoints:
+
+    Use tools like Postman or curl to test your API endpoints.
+    Test your endpoints with your Vue.js frontend to ensure they work together.
