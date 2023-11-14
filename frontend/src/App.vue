@@ -30,18 +30,30 @@
       <div class="inputs">
         <textarea name="inventario" id="itens" cols="30" rows="5"></textarea>
       </div>
-      <Button />
+      <Button @click="getData" />
     </form>
   </main>
 </template>
 
 <script>
 import Button from './components/Button.vue';
+import api from './api.ts';
 
 export default {
   name: 'App',
   components: {
     Button,
+  },
+  methods: {
+    async getData(event) {
+      event.preventDefault();
+      try {
+        const response = await api.getData();
+        console.log(response.data); // Handle the response data as needed
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    },
   },
 };
 </script>
