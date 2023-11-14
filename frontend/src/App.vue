@@ -1,85 +1,80 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <main>
+    <form>
+      <div class="inputs">
+        <label for="name">Nome</label>
+        <input type="text" placeholder="Nome" id="nome" />
+      </div>
+      <div class="inputs">
+        <label for="age">Idade</label>
+        <input type="number" placeholder="Idade" />
+      </div>
+      <div class="inputs">
+        <label for="sex">Sexo</label>
+        <select name="sexo" id="sexo">
+          <option value="M">M</option>
+          <option value="F">F</option>
+        </select>
+      </div>
+      <div class="posicao">
+        <h3>Ultima Posição</h3>
+        <div class="inputs">
+          <label for="longitude">Longitude</label>
+          <input type="text" placeholder="52º 03 21 W" />
+        </div>
+        <div class="inputs">
+          <label for="latitude">Latitude</label>
+          <input type="text" placeholder=" 25º 34 20 S" />
+        </div>
+      </div>
+      <div class="inputs">
+        <textarea name="inventario" id="itens" cols="30" rows="5"></textarea>
+      </div>
+      <Button />
+    </form>
+  </main>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+<script>
+import Button from './components/Button.vue';
+
+export default {
+  name: 'App',
+  components: {
+    Button,
+  },
+};
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Island+Moments&family=Montserrat:ital,wght@1,300&family=Nothing+You+Could+Do&family=Noto+Sans:wght@400;700&family=Palanquin+Dark:wght@400;500;600&display=swap');
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
+form {
   text-align: center;
-  margin-top: 2rem;
+  width: 20%;
+  padding: 10%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.inputs {
+  margin-bottom: 4%;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.inputs input {
+  margin-bottom: 4%;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+h3 {
+  color: #110102;
 }
 
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+label {
+  color: #110102;
 }
 </style>
