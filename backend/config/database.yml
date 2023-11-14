@@ -58,7 +58,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: backend_test
+  database: safehouse_db
   host: localhost
   username: hao
   password: utfpr
