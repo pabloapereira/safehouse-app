@@ -1,5 +1,5 @@
 class SurvivorsController < ApplicationController
-  before_action :set_survivor, only: %i[show create update destroy]
+  before_action :set_survivor, only: %i[show update destroy]
 
   def index
     @survivor = Survivor.all
@@ -30,7 +30,7 @@ class SurvivorsController < ApplicationController
   end
 
   def destroy
-    @usuario.destroy
+    render json: @survivor.destroy
   end
 
   private
