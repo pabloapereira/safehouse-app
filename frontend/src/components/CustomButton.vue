@@ -8,7 +8,7 @@
 
 <script lang="ts">
 export default {
-  name: 'Button',
+  name: "Button",
 };
 </script>
 
