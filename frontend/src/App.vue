@@ -1,50 +1,24 @@
+<script setup lang="ts">
+import Form from './components/Form.vue';
+import List from './components/List.vue';
+</script>
+
 <template>
   <main>
-    <form>
-      <div class="inputs">
-        <label for="name">Nome</label>
-        <input type="text" placeholder="Nome" id="nome" />
+    <div class="flex flex-col h-4/5 lg:flex-row my-12">
+      <div class="grid flex-auto card rounded-box place-items-center">
+        <Form></Form>
       </div>
-      <div class="inputs">
-        <label for="age">Idade</label>
-        <input type="number" placeholder="Idade" />
+      <div
+        class="divider divider-error lg:divider-horizontal mix-blend-color"
+      ></div>
+      <div class="grid flex-grow card rounded-box place-items-center">
+        <List></List>
       </div>
-      <div class="inputs">
-        <label for="sex">Sexo</label>
-        <select name="sexo" id="sexo">
-          <option value="M">M</option>
-          <option value="F">F</option>
-        </select>
-      </div>
-      <div class="posicao">
-        <h3>Ultima Posição</h3>
-        <div class="inputs">
-          <label for="longitude">Longitude</label>
-          <input type="text" placeholder="52º 03 21 W" />
-        </div>
-        <div class="inputs">
-          <label for="latitude">Latitude</label>
-          <input type="text" placeholder=" 25º 34 20 S" />
-        </div>
-      </div>
-      <div class="inputs">
-        <textarea name="inventario" id="itens" cols="30" rows="5"></textarea>
-      </div>
-      <Button />
-    </form>
+    </div>
   </main>
 </template>
 
-<script>
-import Button from './components/Button.vue';
-
-export default {
-  name: 'App',
-  components: {
-    Button,
-  },
-};
-</script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Island+Moments&family=Montserrat:ital,wght@1,300&family=Nothing+You+Could+Do&family=Noto+Sans:wght@400;700&family=Palanquin+Dark:wght@400;500;600&display=swap');
 main {
@@ -52,22 +26,6 @@ main {
   justify-content: center;
   align-items: center;
   height: 100%;
-}
-
-form {
-  text-align: center;
-  width: 20%;
-  padding: 10%;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.inputs {
-  margin-bottom: 4%;
-}
-
-.inputs input {
-  margin-bottom: 4%;
 }
 
 h3 {

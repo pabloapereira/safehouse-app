@@ -6,21 +6,10 @@
   </button>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'Button',
 };
 </script>
 
 <style></style>
-<!-- button {
-  width: 163px;
-  height: 40px;
-  font-size: 20px;
-  font-family: 'Montserrat', sans-serif;
-  color: #110102;
-  background-image: url('frontend\src\assets\img\fundo-button.png');
-  background-size: cover;
-  background-position: right -63px bottom -30px;
-  border-radius: 10%;
-} -->
