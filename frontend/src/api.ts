@@ -8,13 +8,11 @@ const apiClient = axios.create({
 });
 
 export default {
-  // Example function to get data from the API
-  getData() {
+  getSurvivors() {
     return apiClient.get("/survivors");
   },
 
-  // Example function to post data to the API
-  postData(data: Object) {
+  postSurvivor(data: Object) {
     return apiClient.post("/survivors", data);
   },
 };

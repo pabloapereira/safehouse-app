@@ -6,12 +6,12 @@ import { ref, onMounted } from "vue";
 const listRef = ref(null);
 
 const updateList = (formData: Object) => {
-  listRef.value!.getData();
+  listRef.value!.getSurvivors();
   return formData;
 };
 
 onMounted(() => {
-  listRef.value!.getData();
+  listRef.value!.getSurvivors();
 });
 </script>
 

@@ -8,12 +8,12 @@ export default {
     };
   },
   created() {
-    this.getData();
+    this.getSurvivors();
   },
   methods: {
-    async getData() {
+    async getSurvivors() {
       try {
-        const response = await api.getData();
+        const response = await api.getSurvivors();
         this.survivors = response.data;
       } catch (error) {
         console.error("Error fetching data:", error);
