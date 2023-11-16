@@ -17,14 +17,6 @@ main {
   height: 100%;
 }
 
-form {
-  text-align: center;
-  width: 20%;
-  padding: 10%;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 .inputs {
   margin-bottom: 4%;
 }
