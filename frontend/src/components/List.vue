@@ -1,16 +1,27 @@
 <script lang="ts">
-import api from '../api';
+import api from "../api";
+
+let survivors: any[] = [];
 
 export default {
+  data() {
+    return {
+      data: null,
+    };
+  },
+  created() {
+    this.getData();
+  },
   components: {},
   methods: {
     async getData() {
-      console.log('Clicked!');
       try {
         const response = await api.getData();
-        console.log(response.data);
+        survivors = response.data;
+        this.data = response.data;
+        console.log(survivors);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     },
   },
@@ -35,14 +46,13 @@ export default {
                 </label>
               </th>
               <th class="text-black">Name</th>
-              <th class="text-black">Job</th>
+              <th class="text-black">Location</th>
               <th class="text-black">Is Alive?</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            <!-- row 1 -->
-            <tr>
+            <tr v-for="(survivor, index) in data" :key="index">
               <th>
                 <label>
                   <input type="checkbox" class="checkbox" />
@@ -53,128 +63,30 @@ export default {
                   <div class="avatar">
                     <div class="mask mask-squircle w-12 h-12">
                       <img
+                        v-if="survivor.gender === 'Male'"
                         src="https://xsgames.co/randomusers/avatar.php?g=male"
                         alt="Avatar Tailwind CSS Component"
                       />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="font-bold">Hart Hagerty</div>
-                    <div class="text-sm opacity-50">United States</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Zemlak, Daniel and Leannon
-                <br />
-                <span class="badge badge-ghost badge-sm"
-                  >Desktop Support Technician</span
-                >
-              </td>
-              <td>Yes</td>
-              <th>
-                <button class="btn btn-ghost btn-xs">Delete</button>
-              </th>
-            </tr>
-            <!-- row 2 -->
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" class="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div class="flex items-center gap-3">
-                  <div class="avatar">
-                    <div class="mask mask-squircle w-12 h-12">
                       <img
-                        src="https://xsgames.co/randomusers/avatar.php?g=male"
+                        v-if="survivor.gender === 'Female'"
+                        src="https://xsgames.co/randomusers/avatar.php?g=female"
                         alt="Avatar Tailwind CSS Component"
                       />
                     </div>
                   </div>
                   <div>
-                    <div class="font-bold">Brice Swyre</div>
-                    <div class="text-sm opacity-50">China</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Carroll Group
-                <br />
-                <span class="badge badge-ghost badge-sm">Tax Accountant</span>
-              </td>
-              <td>Yes</td>
-              <th>
-                <button class="btn btn-ghost btn-xs">Delete</button>
-              </th>
-            </tr>
-            <!-- row 3 -->
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" class="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div class="flex items-center gap-3">
-                  <div class="avatar">
-                    <div class="mask mask-squircle w-12 h-12">
-                      <img
-                        src="https://xsgames.co/randomusers/avatar.php?g=male"
-                        alt="Avatar Tailwind CSS Component"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="font-bold">Marjy Ferencz</div>
+                    <div class="font-bold">{{ survivor.name }}</div>
                     <div class="text-sm opacity-50">Russia</div>
                   </div>
                 </div>
               </td>
               <td>
-                Rowe-Schoen
+                Unknown
                 <br />
-                <span class="badge badge-ghost badge-sm"
-                  >Office Assistant I</span
-                >
+                <span class="badge badge-ghost badge-sm">Missing</span>
               </td>
-              <td>No</td>
-              <th>
-                <button class="btn btn-ghost btn-xs">Delete</button>
-              </th>
-            </tr>
-            <!-- row 4 -->
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" class="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div class="flex items-center gap-3">
-                  <div class="avatar">
-                    <div class="mask mask-squircle w-12 h-12">
-                      <img
-                        src="https://xsgames.co/randomusers/avatar.php?g=male"
-                        alt="Avatar Tailwind CSS Component"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="font-bold">Yancy Tear</div>
-                    <div class="text-sm opacity-50">Brazil</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Wyman-Ledner
-                <br />
-                <span class="badge badge-ghost badge-sm"
-                  >Community Outreach Specialist</span
-                >
-              </td>
-              <td>Yes</td>
+              <td v-if="survivor.is_alive">Yes</td>
+              <td v-else>No</td>
               <th>
                 <button class="btn btn-ghost btn-xs">Delete</button>
               </th>
