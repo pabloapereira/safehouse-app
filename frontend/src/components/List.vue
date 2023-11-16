@@ -34,9 +34,9 @@ export default {
                   <input type="checkbox" class="checkbox" />
                 </label>
               </th>
-              <th>Name</th>
-              <th>Job</th>
-              <th>Is Alive?</th>
+              <th class="text-black">Name</th>
+              <th class="text-black">Job</th>
+              <th class="text-black">Is Alive?</th>
               <th></th>
             </tr>
           </thead>

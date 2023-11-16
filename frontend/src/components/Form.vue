@@ -22,7 +22,7 @@ export default {
 
 <template>
   <div
-    class="card w-96 shadow-xl bg-gradient-to-t from-red-800 from-20% to-transparent to-90%"
+    class="card w-96 shadow-xl bg-gradient-to-t from-red-800 from-20% to-transparent to-90% text-black"
   >
     <div class="card-body items-center text-center">
       <h2 class="card-title">Novo Sobrevivente</h2>
@@ -30,7 +30,7 @@ export default {
       <form class="mb-5">
         <div class="form-control w-full max-w-xs">
           <label class="label">
-            <span class="label-text">Nome</span>
+            <span class="label-text text-gray-400">Nome</span>
           </label>
           <input
             type="text"
@@ -42,7 +42,7 @@ export default {
 
         <div class="form-control w-full max-w-xs">
           <label class="label">
-            <span class="label-text">Idade</span>
+            <span class="label-text text-gray-400">Idade</span>
           </label>
           <input
             type="number"
@@ -56,9 +56,9 @@ export default {
 
         <div class="form-control w-full max-w-xs">
           <label class="label">
-            <span class="label-text">Sexo</span>
+            <span class="label-text text-gray-400">Sexo</span>
           </label>
-          <select class="select select-bordered mb-4" id="gender">
+          <select class="select select-bordered mb-4 text-gray-400" id="gender">
             <option disabled selected>Gênero</option>
             <option>Feminino</option>
             <option>Masculino</option>
@@ -69,7 +69,7 @@ export default {
 
         <div class="form-control w-full max-w-xs">
           <label class="label">
-            <span class="label-text">Longitude</span>
+            <span class="label-text text-gray-400">Longitude</span>
           </label>
           <input
             type="number"
@@ -84,7 +84,7 @@ export default {
 
         <div class="form-control w-full max-w-xs">
           <label class="label">
-            <span class="label-text">Latitude</span>
+            <span class="label-text text-gray-400">Latitude</span>
           </label>
           <input
             type="number"
