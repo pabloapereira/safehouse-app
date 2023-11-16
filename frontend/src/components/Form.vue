@@ -6,11 +6,30 @@ export default {
   components: {
     Button,
   },
+  data() {
+    return {
+      formData: {
+        name: "",
+        age: null,
+        gender: "",
+        longitude: null,
+        latitude: null,
+        is_alive: true,
+      },
+    };
+  },
+  computed: {
+    isFormValid() {
+      return (
+        this.formData.name && this.formData.age !== null && this.formData.gender
+      );
+    },
+  },
   methods: {
-    async getData() {
-      console.log("Clicked!");
+    async sendData() {
       try {
-        const response = await api.getData();
+        console.log(this.formData.gender);
+        const response = await api.postData(this.formData);
         console.log(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -37,6 +56,8 @@ export default {
             placeholder="Rick Grimes"
             class="input input-bordered w-full max-w-xs"
             id="name"
+            v-model="formData.name"
+            required
           />
         </div>
 
@@ -51,6 +72,8 @@ export default {
             placeholder="30"
             class="input input-bordered w-full max-w-xs"
             id="age"
+            v-model="formData.age"
+            required
           />
         </div>
 
@@ -58,10 +81,15 @@ export default {
           <label class="label">
             <span class="label-text text-gray-400">Sexo</span>
           </label>
-          <select class="select select-bordered mb-4 text-gray-400" id="gender">
+          <select
+            class="select select-bordered mb-4 text-gray-400"
+            id="gender"
+            v-model="formData.gender"
+            required
+          >
             <option disabled selected>Gênero</option>
-            <option>Feminino</option>
-            <option>Masculino</option>
+            <option value="Female">Feminino</option>
+            <option value="Male">Masculino</option>
           </select>
         </div>
 
@@ -79,6 +107,7 @@ export default {
             placeholder="0.000000"
             class="input input-bordered w-full max-w-xs"
             id="longitude"
+            v-model="formData.longitude"
           />
         </div>
 
@@ -93,7 +122,8 @@ export default {
             step="0.000001"
             placeholder="0.000000"
             class="input input-bordered w-full max-w-xs"
-            id="longitude"
+            id="latitude"
+            v-model="formData.latitude"
           />
         </div>
 
@@ -103,7 +133,11 @@ export default {
         </div> -->
       </form>
       <div class="card-actions">
-        <Button @click.prevent="getData" />
+        <Button
+          @click.prevent="sendData"
+          :disabled="!isFormValid"
+          :style="{ opacity: isFormValid ? '1' : '0.5' }"
+        />
       </div>
     </div>
   </div>
