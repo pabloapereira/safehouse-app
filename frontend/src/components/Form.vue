@@ -1,6 +1,6 @@
 <script lang="ts">
-import Button from './Button.vue';
-import api from '../api';
+import Button from "./CustomButton.vue";
+import api from "../api";
 
 export default {
   components: {
@@ -8,12 +8,12 @@ export default {
   },
   methods: {
     async getData() {
-      console.log('Clicked!');
+      console.log("Clicked!");
       try {
         const response = await api.getData();
         console.log(response.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     },
   },
