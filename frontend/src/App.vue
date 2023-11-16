@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import Form from './components/Form.vue';
+import List from './components/List.vue';
 </script>
 
 <template>
   <main>
     <div class="flex flex-col h-4/5 lg:flex-row my-12">
-      <div class="grid flex-grow card rounded-box place-items-center">
+      <div class="grid flex-auto card rounded-box place-items-center">
         <Form></Form>
       </div>
       <div
         class="divider divider-error lg:divider-horizontal mix-blend-color"
       ></div>
       <div class="grid flex-grow card rounded-box place-items-center">
-        <Form></Form>
+        <List></List>
       </div>
     </div>
   </main>
