@@ -4,7 +4,7 @@
 
 :root {
   background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
-    url('@/assets/img/fundoZumbi.jpg');
+    url("@/assets/img/fundoZumbi.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
