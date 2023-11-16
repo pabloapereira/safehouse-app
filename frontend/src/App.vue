@@ -17,14 +17,6 @@ main {
   height: 100%;
 }
 
-.inputs {
-  margin-bottom: 4%;
-}
-
-.inputs input {
-  margin-bottom: 4%;
-}
-
 h3 {
   color: #110102;
 }
