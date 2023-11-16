@@ -19,6 +19,14 @@ export default {
         console.error("Error fetching data:", error);
       }
     },
+    async deleteSurvivor(id: string) {
+      try {
+        await api.deleteSurvivor(id);
+        this.getSurvivors();
+      } catch (error) {
+        console.error("Error deleting survivor:", error);
+      }
+    },
   },
   props: {
     data: {
@@ -88,7 +96,12 @@ export default {
               <td v-if="survivor.is_alive">Yes</td>
               <td v-else>No</td>
               <th>
-                <button class="btn btn-ghost btn-xs">Delete</button>
+                <button
+                  class="btn btn-ghost btn-xs"
+                  @click="deleteSurvivor(survivor.id)"
+                >
+                  Delete
+                </button>
               </th>
             </tr>
           </tbody>

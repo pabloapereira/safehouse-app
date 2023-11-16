@@ -15,4 +15,8 @@ export default {
   postSurvivor(data: Object) {
     return apiClient.post("/survivors", data);
   },
+
+  deleteSurvivor(index: string) {
+    return apiClient.delete(`survivors/${index}`);
+  },
 };

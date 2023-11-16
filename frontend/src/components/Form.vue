@@ -1,7 +1,7 @@
 <script lang="ts">
 import Button from "./CustomButton.vue";
 import api from "../api";
-
+// Refactor all of this to Vue 3
 export default {
   components: {
     Button,
