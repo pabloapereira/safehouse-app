@@ -1,26 +1,38 @@
 <script setup lang="ts">
-import Form from './components/Form.vue';
-import List from './components/List.vue';
+import Form from "./components/Form.vue";
+import List from "./components/List.vue";
+import { ref, onMounted } from "vue";
+
+const listRef = ref(null);
+
+const updateList = (formData: Object) => {
+  listRef.value!.getData();
+  return formData;
+};
+
+onMounted(() => {
+  listRef.value!.getData();
+});
 </script>
 
 <template>
   <main>
     <div class="flex flex-col h-4/5 lg:flex-row my-12">
       <div class="grid flex-auto card rounded-box place-items-center">
-        <Form></Form>
+        <Form @form-data="updateList" />
       </div>
       <div
         class="divider divider-error lg:divider-horizontal mix-blend-color"
       ></div>
       <div class="grid flex-grow card rounded-box place-items-center">
-        <List></List>
+        <List ref="listRef" />
       </div>
     </div>
   </main>
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Island+Moments&family=Montserrat:ital,wght@1,300&family=Nothing+You+Could+Do&family=Noto+Sans:wght@400;700&family=Palanquin+Dark:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Island+Moments&family=Montserrat:ital,wght@1,300&family=Nothing+You+Could+Do&family=Noto+Sans:wght@400;700&family=Palanquin+Dark:wght@400;500;600&display=swap");
 main {
   display: flex;
   justify-content: center;

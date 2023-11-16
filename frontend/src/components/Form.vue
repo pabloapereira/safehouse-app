@@ -30,7 +30,7 @@ export default {
       try {
         console.log(this.formData.gender);
         const response = await api.postData(this.formData);
-        console.log(response.data);
+        this.$emit("form-data", this.formData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }

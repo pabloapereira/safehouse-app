@@ -1,28 +1,28 @@
 <script lang="ts">
 import api from "../api";
 
-let survivors: any[] = [];
-
 export default {
   data() {
     return {
-      data: null,
+      survivors: [],
     };
   },
   created() {
     this.getData();
   },
-  components: {},
   methods: {
     async getData() {
       try {
         const response = await api.getData();
-        survivors = response.data;
-        this.data = response.data;
-        console.log(survivors);
+        this.survivors = response.data;
       } catch (error) {
         console.error("Error fetching data:", error);
       }
+    },
+  },
+  props: {
+    data: {
+      type: Array,
     },
   },
 };
@@ -52,7 +52,7 @@ export default {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(survivor, index) in data" :key="index">
+            <tr v-for="(survivor, index) in survivors" :key="index">
               <th>
                 <label>
                   <input type="checkbox" class="checkbox" />
