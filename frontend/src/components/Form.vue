@@ -22,7 +22,7 @@ export default {
 
 <template>
   <div
-    class="card w-96 shadow-xl mt-12 bg-gradient-to-t from-red-800 from-20% to-transparent to-90%"
+    class="card w-96 shadow-xl bg-gradient-to-t from-red-800 from-20% to-transparent to-90%"
   >
     <div class="card-body items-center text-center">
       <h2 class="card-title">Novo Sobrevivente</h2>

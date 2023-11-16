@@ -4,7 +4,17 @@ import Form from './components/Form.vue';
 
 <template>
   <main>
-    <Form></Form>
+    <div class="flex flex-col h-4/5 lg:flex-row my-12">
+      <div class="grid flex-grow card rounded-box place-items-center">
+        <Form></Form>
+      </div>
+      <div
+        class="divider divider-error lg:divider-horizontal mix-blend-color"
+      ></div>
+      <div class="grid flex-grow card rounded-box place-items-center">
+        <Form></Form>
+      </div>
+    </div>
   </main>
 </template>
 
