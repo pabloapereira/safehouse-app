@@ -6,11 +6,6 @@ class SurvivorsController < ApplicationController
 
     render json: @survivor
   end
-
-  def show
-    render json: @survivor
-  end
-
   def create
     @survivor = Survivor.new(survivor_params)
 
@@ -20,15 +15,16 @@ class SurvivorsController < ApplicationController
       render json: @survivor.errors, status: :unprocessable_entity
     end
   end
-
+  def show
+    render json: @survivor
+  end
   def update
     if @survivor.update(survivor_params)
-      render json: @usuario
+      render json: @survivor
     else
       render json: @survivor.errors, status: :unprocessable_entity
     end
   end
-
   def destroy
     render json: @survivor.destroy
   end
