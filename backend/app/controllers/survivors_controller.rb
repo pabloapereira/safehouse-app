@@ -2,12 +2,13 @@ class SurvivorsController < ApplicationController
   before_action :set_survivor, only: %i[show update destroy]
 
   def index
-    @survivor = Survivor.all
+    @survivors = Survivor.all
 
-    render json: @survivor
+    render json: @survivors
   end
   def create
     @survivor = Survivor.new(survivor_params)
+    @survivor.build_location
 
     if @survivor.save
       render json: @survivor, status: :created, location: @survivor

@@ -12,8 +12,10 @@ export default {
         name: "",
         age: null,
         gender: "",
-        longitude: null,
-        latitude: null,
+        location_attributes: {
+          longitude: null,
+          latitude: null,
+        },
         is_alive: true,
       },
     };
@@ -28,7 +30,7 @@ export default {
   methods: {
     async sendData() {
       try {
-        console.log(this.formData.gender);
+        console.log(this.formData.location_attributes.longitude);
         const response = await api.postSurvivor(this.formData);
         this.$emit("form-data", this.formData);
       } catch (error) {
@@ -107,7 +109,7 @@ export default {
             placeholder="0.000000"
             class="input input-bordered w-full max-w-xs"
             id="longitude"
-            v-model="formData.longitude"
+            v-model="formData.location_attributes.longitude"
           />
         </div>
 
@@ -123,7 +125,7 @@ export default {
             placeholder="0.000000"
             class="input input-bordered w-full max-w-xs"
             id="latitude"
-            v-model="formData.latitude"
+            v-model="formData.location_attributes.latitude"
           />
         </div>
 

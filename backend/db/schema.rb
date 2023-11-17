@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_14_124602) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_17_201247) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,5 +60,4 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_14_124602) do
   add_foreign_key "inventories", "survivors"
   add_foreign_key "items_inventories", "inventories"
   add_foreign_key "items_inventories", "items"
-  add_foreign_key "locations", "survivors"
 end

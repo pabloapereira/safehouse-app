@@ -3,15 +3,17 @@ class LocationsController < ApplicationController
   before_action :set_location, only: %i[show update destroy]
 
   def index
-    @location = @survivor.location
+    @locations = @survivor.locations.all
+
+    render json: @locations
   end
   def create
     logger.debug(location_params)
-    @location = @survivor.location.build_location(location_params)
+    @location = @survivor.build_location(location_params)
     if @location.save
       render json: @location, status: :created, location: @location
     else
-      render json: @location.errors, status: :unprocessable_entity
+      render json: { error: "Error trying to Create a Location", details: @location.errors, params: location_params }, status: :unprocessable_entity
     end
   end
   def show
@@ -21,7 +23,7 @@ class LocationsController < ApplicationController
     if @location.update(location_params)
       render json: @location
     else
-      render json: @location.errors, status: :unprocessable_entity
+      render json: { error: "Error trying to update a Location", details: @location.errors, params: location_params }, status: :unprocessable_entity
     end
   end
   def destroy
@@ -33,7 +35,7 @@ class LocationsController < ApplicationController
     @survivor = Survivor.find(params[:survivor_id])
   end
   def set_location
-    @location = @survivor.location.find(params[:id])
+    @location = @survivor.locations.find(params[:id])
   end
   def location_params
     params.require(:location).permit(:latitude, :longitude, :survivor_id)
