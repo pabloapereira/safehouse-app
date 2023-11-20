@@ -1,11 +1,10 @@
 class LocationsController < ApplicationController
-  # before_action :get_survivor
+  before_action :get_survivor
   before_action :set_location, only: %i[show update destroy]
 
   def index
     if params[:survivor_id]
-      @survivor = Survivor.find(params[:survivor_id])
-      # binding.pry
+      # @survivor = Survivor.find(params[:survivor_id])
       @locations = @survivor.locations
     else
       @locations = Location.all
@@ -14,10 +13,10 @@ class LocationsController < ApplicationController
     render json: @locations
   end
   def create
-    logger.debug(location_params)
-    @location = @survivor.build_location(location_params)
+    @location = @survivor.locations.build(location_params)
+    # binding.pry
     if @location.save
-      render json: @location, status: :created, location: @location
+      render json: @location, status: :created
     else
       render json: { error: "Error trying to Create a Location", details: @location.errors, params: location_params }, status: :unprocessable_entity
     end
@@ -37,9 +36,9 @@ class LocationsController < ApplicationController
   end
 
   private
-  # def get_survivor
-  #   @survivor = Survivor.find(params[:survivor_id])
-  # end
+  def get_survivor
+    @survivor = Survivor.find(params[:survivor_id])
+  end
   def set_location
     @location = @survivor.locations.find(params[:id])
   end
