@@ -1,9 +1,15 @@
 class LocationsController < ApplicationController
-  before_action :get_survivor
+  # before_action :get_survivor
   before_action :set_location, only: %i[show update destroy]
 
   def index
-    @locations = @survivor.locations.all
+    # binding.pry
+    if params[:survivor_id]
+      @survivor = Survivor.find_by(params[:survivor_id])
+      @locations = @survivor.locations
+    else
+      @locations = Location.all
+    end
 
     render json: @locations
   end
@@ -31,9 +37,9 @@ class LocationsController < ApplicationController
   end
 
   private
-  def get_survivor
-    @survivor = Survivor.find(params[:survivor_id])
-  end
+  # def get_survivor
+  #   @survivor = Survivor.find(params[:survivor_id])
+  # end
   def set_location
     @location = @survivor.locations.find(params[:id])
   end

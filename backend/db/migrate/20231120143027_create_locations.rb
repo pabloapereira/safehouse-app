@@ -1,9 +1,9 @@
 class CreateLocations < ActiveRecord::Migration[7.1]
   def change
     create_table :locations do |t|
-      t.float :longitude
-      t.float :latitude
-      t.references :survivor, null: false, foreign_key: true
+      t.decimal :longitude
+      t.decimal :latitude
+      t.references :survivor, foreign_key: true
 
       t.timestamps
     end
