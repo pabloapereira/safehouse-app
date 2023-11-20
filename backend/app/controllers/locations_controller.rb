@@ -3,9 +3,9 @@ class LocationsController < ApplicationController
   before_action :set_location, only: %i[show update destroy]
 
   def index
-    # binding.pry
     if params[:survivor_id]
-      @survivor = Survivor.find_by(params[:survivor_id])
+      @survivor = Survivor.find(params[:survivor_id])
+      # binding.pry
       @locations = @survivor.locations
     else
       @locations = Location.all
