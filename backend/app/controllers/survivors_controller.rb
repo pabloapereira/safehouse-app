@@ -8,9 +8,12 @@ class SurvivorsController < ApplicationController
   end
   def create
     @survivor = Survivor.new(survivor_params)
-    @survivor.build_location
-
+    
     if @survivor.save
+      location = @survivor.locations.build(location_params)
+      location.save
+      @survivor.update(location_id: location.id)
+
       render json: @survivor, status: :created, location: @survivor
     else
       render json: @survivor.errors, status: :unprocessable_entity
@@ -20,6 +23,13 @@ class SurvivorsController < ApplicationController
     render json: @survivor
   end
   def update
+    basic_params = {
+      name: params[:survivor][:name],
+      age: params[:survivor][:age],
+      gender: params[:survivor][:gender],
+      is_alive: params[:survivor][:is_alive]
+    }
+
     if @survivor.update(survivor_params)
       render json: @survivor
     else
@@ -37,7 +47,15 @@ class SurvivorsController < ApplicationController
   end
 
   def survivor_params
-    params.require(:survivor).permit(:name, :gender, :is_alive, location_attributes: [:longitude, :latitude], inventory_attributes: [:item_name, :quantity])
+    params.require(:survivor).permit(base_survivor_attributes)
+  end
+  
+  def location_params
+    params.require(:survivor).permit(:longitude, :latitude)
+  end
+  
+  def base_survivor_attributes
+    [:name, :gender, :age, :is_alive]
   end
 
 end
