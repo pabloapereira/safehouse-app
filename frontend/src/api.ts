@@ -21,6 +21,6 @@ export default {
   },
 
   getLocation(index: string) {
-    return apiClient.get('/survivors/${index}/location/last');
+    return apiClient.get(`/survivors/${index}/locations/last`);
   },
 };

@@ -116,7 +116,12 @@ export default {
                 </div>
               </td>
               <td>
-                Unknown
+                {{ console.log(getLocation(survivor.id)) }}
+                <!-- Idea to improve this part
+                1 - App need to load every survivor
+                2 - For every Survivor, get it's location
+                3 - Store location inside Survivor[n]
+                4 - Show it here simply as "survivor.longitude" -->
                 <br />
                 <span class="badge badge-ghost badge-sm">Missing</span>
               </td>

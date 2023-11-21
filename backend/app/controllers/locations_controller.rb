@@ -21,7 +21,6 @@ class LocationsController < ApplicationController
     end
   end
   def last_location
-    binding.pry
     render json: @survivor.locations.last
   end
   def show
