@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :survivors do
-    get '/locations/last', to: 'locations#last_location', as: 'last'
+    get '/locations/full_survivor', to: 'locations#full_survivor', as: 'full_info'
     resources :locations
   end
 

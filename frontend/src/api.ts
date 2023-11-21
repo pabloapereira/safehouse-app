@@ -20,7 +20,7 @@ export default {
     return apiClient.delete(`survivors/${index}`);
   },
 
-  getLocation(index: string) {
-    return apiClient.get(`/survivors/${index}/locations/last`);
+  getFullSurvivor(index: string) {
+    return apiClient.get(`/survivors/${index}/locations/full_survivor`);
   },
 };

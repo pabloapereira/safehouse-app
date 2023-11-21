@@ -20,9 +20,27 @@ class LocationsController < ApplicationController
       render json: { error: "Error trying to Create a Location", details: @location.errors, params: location_params }, status: :unprocessable_entity
     end
   end
-  def last_location
-    render json: @survivor.locations.last
+  def full_survivor
+    all_survivor_data = []
+  
+    Survivor.all.each do |survivor|
+      survivor_last_location = survivor.locations.last
+  
+      survivor_data = {
+        name: survivor.name,
+        age: survivor.age,
+        gender: survivor.gender,
+        is_alive: survivor.is_alive,
+        longitude: survivor_last_location&.longitude,
+        latitude: survivor_last_location&.latitude
+      }
+  
+      all_survivor_data << survivor_data
+    end
+  
+    render json: all_survivor_data
   end
+  
   def show
     render json: @location
   end

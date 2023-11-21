@@ -13,7 +13,7 @@ export default {
   methods: {
     async getSurvivors() {
       try {
-        const response = await api.getSurvivors();
+        const response = await api.getFullSurvivor('1');
         this.survivors = response.data;
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -25,16 +25,6 @@ export default {
         this.getSurvivors();
       } catch (error) {
         console.error('Error deleting survivor:', error);
-      }
-    },
-    async getLocation(id: string) {
-      try {
-        await api.getLocation(id);
-      } catch (error) {
-        console.error(
-          'Error trying to fetch location for survivor ID: ' + id,
-          error
-        );
       }
     },
   },
@@ -116,14 +106,17 @@ export default {
                 </div>
               </td>
               <td>
-                {{ console.log(getLocation(survivor.id)) }}
+                <!-- {{ console.log(getLocation(survivor.id)) }} -->
                 <!-- Idea to improve this part
                 1 - App need to load every survivor
                 2 - For every Survivor, get it's location
                 3 - Store location inside Survivor[n]
                 4 - Show it here simply as "survivor.longitude" -->
+                {{ survivor.longitude }}
                 <br />
-                <span class="badge badge-ghost badge-sm">Missing</span>
+                <span class="badge badge-ghost badge-sm">{{
+                  survivor.latitude
+                }}</span>
               </td>
               <td v-if="survivor.is_alive">Yes</td>
               <td v-else>No</td>

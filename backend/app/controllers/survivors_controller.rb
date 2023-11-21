@@ -23,13 +23,6 @@ class SurvivorsController < ApplicationController
     render json: @survivor
   end
   def update
-    basic_params = {
-      name: params[:survivor][:name],
-      age: params[:survivor][:age],
-      gender: params[:survivor][:gender],
-      is_alive: params[:survivor][:is_alive]
-    }
-
     if @survivor.update(survivor_params)
       render json: @survivor
     else
