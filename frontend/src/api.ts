@@ -1,22 +1,26 @@
-import axios from "axios";
+import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: 'http://localhost:3000/',
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
 
 export default {
   getSurvivors() {
-    return apiClient.get("/survivors");
+    return apiClient.get('/survivors');
   },
 
   postSurvivor(data: Object) {
-    return apiClient.post("/survivors", data);
+    return apiClient.post('/survivors', data);
   },
 
   deleteSurvivor(index: string) {
     return apiClient.delete(`survivors/${index}`);
+  },
+
+  getLocation(index: string) {
+    return apiClient.get('/survivors/${index}/location/last');
   },
 };

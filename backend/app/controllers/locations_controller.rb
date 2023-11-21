@@ -4,7 +4,6 @@ class LocationsController < ApplicationController
 
   def index
     if params[:survivor_id]
-      # @survivor = Survivor.find(params[:survivor_id])
       @locations = @survivor.locations
     else
       @locations = Location.all
@@ -20,6 +19,10 @@ class LocationsController < ApplicationController
     else
       render json: { error: "Error trying to Create a Location", details: @location.errors, params: location_params }, status: :unprocessable_entity
     end
+  end
+  def last_location
+    binding.pry
+    render json: @survivor.locations.last
   end
   def show
     render json: @location

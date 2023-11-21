@@ -1,5 +1,5 @@
 <script lang="ts">
-import api from "../api";
+import api from '../api';
 
 export default {
   data() {
@@ -16,7 +16,7 @@ export default {
         const response = await api.getSurvivors();
         this.survivors = response.data;
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       }
     },
     async deleteSurvivor(id: string) {
@@ -24,7 +24,17 @@ export default {
         await api.deleteSurvivor(id);
         this.getSurvivors();
       } catch (error) {
-        console.error("Error deleting survivor:", error);
+        console.error('Error deleting survivor:', error);
+      }
+    },
+    async getLocation(id: string) {
+      try {
+        await api.getLocation(id);
+      } catch (error) {
+        console.error(
+          'Error trying to fetch location for survivor ID: ' + id,
+          error
+        );
       }
     },
   },
@@ -48,6 +58,7 @@ export default {
           <!-- head -->
           <thead>
             <tr>
+              <th class="text-black">Edit</th>
               <th>
                 <label>
                   <input type="checkbox" class="checkbox" />
@@ -62,10 +73,26 @@ export default {
           <tbody>
             <tr v-for="(survivor, index) in survivors" :key="index">
               <th>
-                <label>
-                  <input type="checkbox" class="checkbox" />
-                </label>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
+                  />
+                </svg>
               </th>
+              <td>
+                <label>
+                  <input type="checkbox" class="checkbox checkbox-error" />
+                </label>
+              </td>
               <td>
                 <div class="flex items-center gap-3">
                   <div class="avatar">
