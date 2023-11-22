@@ -14,6 +14,7 @@ class SurvivorsController < ApplicationController
         age: survivor.age,
         gender: survivor.gender,
         is_alive: survivor.is_alive,
+        location_id: survivor.location_id,
         longitude: survivor_last_location&.longitude,
         latitude: survivor_last_location&.latitude,
         inventory_id: survivor.inventory_id,

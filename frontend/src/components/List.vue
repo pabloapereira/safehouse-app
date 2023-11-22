@@ -35,9 +35,29 @@ export default {
       }
       form?.classList.add('hidden');
     },
-    updateLocation(id: string) {
+    async updateLocation(
+      survivorId: string,
+      locationId: string,
+      latitude: string,
+      longitude: string,
+      formIndex: number
+    ) {
       console.log('Trying to update location');
-      this.getSurvivors();
+      const newLocation = {
+        latitude: latitude,
+        longitude: longitude,
+        survivor_id: survivorId,
+      };
+
+      const jsonLocation = JSON.stringify(newLocation);
+      try {
+        await api.updateLocation(survivorId, locationId, jsonLocation);
+        console.log('Location updated!');
+        const form = document.getElementById('edit-form-' + formIndex);
+        form?.classList.add('hidden');
+      } catch (error) {
+        console.error('Error updating location:', error);
+      }
 
       return;
     },
@@ -113,11 +133,11 @@ export default {
               </td>
               <td>
                 <span class="badge badge-ghost badge-sm">
-                  {{ survivor.longitude }}
+                  {{ survivor.latitude }}
                 </span>
                 <br />
                 <span class="badge badge-ghost badge-sm">{{
-                  survivor.latitude
+                  survivor.longitude
                 }}</span>
               </td>
               <td v-if="survivor.is_alive">Yes</td>
@@ -137,6 +157,7 @@ export default {
                   type="text"
                   placeholder="Latitude"
                   class="input input-bordered w-full max-w-xs text-white"
+                  v-model="survivor.latitude"
                 />
               </td>
               <td colspan="2">
@@ -144,10 +165,22 @@ export default {
                   type="text"
                   placeholder="Longitude"
                   class="input input-bordered w-full max-w-xs text-white"
+                  v-model="survivor.longitude"
                 />
               </td>
               <td colspan="1">
-                <button class="btn" @click="updateLocation(survivor.id)">
+                <button
+                  class="btn"
+                  @click="
+                    updateLocation(
+                      survivor.id,
+                      survivor.location_id,
+                      survivor.latitude,
+                      survivor.longitude,
+                      index
+                    )
+                  "
+                >
                   Send
                 </button>
               </td>

@@ -19,4 +19,15 @@ export default {
   deleteSurvivor(index: string) {
     return apiClient.delete(`survivors/${index}`);
   },
+
+  updateLocation(
+    survivor_id: string,
+    location_id: string,
+    newLocation: string
+  ) {
+    return apiClient.put(
+      `/survivors/${survivor_id}/locations/${location_id}`,
+      newLocation
+    );
+  },
 };
