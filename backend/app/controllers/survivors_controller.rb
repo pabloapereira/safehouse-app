@@ -3,9 +3,29 @@ class SurvivorsController < ApplicationController
 
   def index
     @survivors = Survivor.all
+    survivor_complete = []
+  
+    @survivors.each do |survivor|
+      survivor_last_location = survivor.locations.last
+  
+      survivor_data = {
+        name: survivor.name,
+        age: survivor.age,
+        gender: survivor.gender,
+        is_alive: survivor.is_alive,
+        longitude: survivor_last_location&.longitude,
+        latitude: survivor_last_location&.latitude,
+        inventory_id: survivor.inventory_id,
+        created_at: survivor.created_at,
+		    updated_at: survivor.updated_at,
+      }
+  
+      survivor_complete << survivor_data
+    end
 
-    render json: @survivors
+    render json: survivor_complete
   end
+  
   def create
     @survivor = Survivor.new(survivor_params)
     
@@ -19,9 +39,11 @@ class SurvivorsController < ApplicationController
       render json: @survivor.errors, status: :unprocessable_entity
     end
   end
+
   def show
     render json: @survivor
   end
+  
   def update
     if @survivor.update(survivor_params)
       render json: @survivor

@@ -19,8 +19,4 @@ export default {
   deleteSurvivor(index: string) {
     return apiClient.delete(`survivors/${index}`);
   },
-
-  getFullSurvivor(index: string) {
-    return apiClient.get(`/survivors/${index}/locations/full_survivor`);
-  },
 };

@@ -13,7 +13,7 @@ export default {
   methods: {
     async getSurvivors() {
       try {
-        const response = await api.getFullSurvivor('1');
+        const response = await api.getSurvivors();
         this.survivors = response.data;
       } catch (error) {
         console.error('Error fetching data:', error);
