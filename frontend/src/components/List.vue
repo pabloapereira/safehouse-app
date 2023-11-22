@@ -92,7 +92,7 @@ export default {
           <tbody v-for="(survivor, index) in survivors" :key="index">
             <tr>
               <th>
-                <button class="btn" @click="showEditField(index)">
+                <button class="btn px-[0.75rem]" @click="showEditField(index)">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
