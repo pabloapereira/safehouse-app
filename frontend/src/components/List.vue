@@ -27,6 +27,20 @@ export default {
         console.error('Error deleting survivor:', error);
       }
     },
+    showEditField(index: number) {
+      const form = document.getElementById('edit-form-' + index);
+      if (form?.classList.contains('hidden')) {
+        form?.classList.remove('hidden');
+        return;
+      }
+      form?.classList.add('hidden');
+    },
+    updateLocation(id: string) {
+      console.log('Trying to update location');
+      this.getSurvivors();
+
+      return;
+    },
   },
   props: {
     data: {
@@ -58,7 +72,7 @@ export default {
           <tbody v-for="(survivor, index) in survivors" :key="index">
             <tr>
               <th>
-                <button class="btn">
+                <button class="btn" @click="showEditField(index)">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -117,7 +131,7 @@ export default {
                 </button>
               </th>
             </tr>
-            <tr class="hidden">
+            <tr class="hidden" :id="'edit-form-' + index">
               <td colspan="2">
                 <input
                   type="text"
@@ -133,7 +147,9 @@ export default {
                 />
               </td>
               <td colspan="1">
-                <button class="btn">Send</button>
+                <button class="btn" @click="updateLocation(survivor.id)">
+                  Send
+                </button>
               </td>
             </tr>
           </tbody>
