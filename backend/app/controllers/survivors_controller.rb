@@ -40,11 +40,14 @@ class SurvivorsController < ApplicationController
   end
 
   def survivor_params
-    params.require(:survivor).permit(base_survivor_attributes)
+    params.require(:survivor).permit(base_survivor_attributes, :longitude, :latitude)
   end
   
   def location_params
-    params.require(:survivor).permit(:longitude, :latitude)
+    {
+      longitude: params[:longitude],
+      latitude: params[:latitude]
+    }
   end
   
   def base_survivor_attributes

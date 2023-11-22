@@ -1,6 +1,6 @@
 <script lang="ts">
-import Button from "./CustomButton.vue";
-import api from "../api";
+import Button from './CustomButton.vue';
+import api from '../api';
 // Refactor all of this to Vue 3
 export default {
   components: {
@@ -9,13 +9,11 @@ export default {
   data() {
     return {
       formData: {
-        name: "",
+        name: '',
         age: null,
-        gender: "",
-        location_attributes: {
-          longitude: null,
-          latitude: null,
-        },
+        gender: '',
+        longitude: null,
+        latitude: null,
         is_alive: true,
       },
     };
@@ -30,11 +28,11 @@ export default {
   methods: {
     async sendData() {
       try {
-        console.log(this.formData.location_attributes.longitude);
+        console.log(this.formData.longitude);
         const response = await api.postSurvivor(this.formData);
-        this.$emit("form-data", this.formData);
+        this.$emit('form-data', this.formData);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       }
     },
   },
@@ -56,7 +54,7 @@ export default {
           <input
             type="text"
             placeholder="Rick Grimes"
-            class="input input-bordered w-full max-w-xs"
+            class="input input-bordered text-white w-full max-w-xs text-white"
             id="name"
             v-model="formData.name"
             required
@@ -72,7 +70,7 @@ export default {
             min="1"
             max="120"
             placeholder="30"
-            class="input input-bordered w-full max-w-xs"
+            class="input input-bordered text-white w-full max-w-xs"
             id="age"
             v-model="formData.age"
             required
@@ -84,7 +82,7 @@ export default {
             <span class="label-text text-gray-400">Sexo</span>
           </label>
           <select
-            class="select select-bordered mb-4 text-gray-400"
+            class="select select-bordered text-white mb-4 text-gray-400"
             id="gender"
             v-model="formData.gender"
             required
@@ -107,9 +105,9 @@ export default {
             max="180.000000"
             step="0.000001"
             placeholder="0.000000"
-            class="input input-bordered w-full max-w-xs"
+            class="input input-bordered text-white w-full max-w-xs"
             id="longitude"
-            v-model="formData.location_attributes.longitude"
+            v-model="formData.longitude"
           />
         </div>
 
@@ -123,9 +121,9 @@ export default {
             max="90.000000"
             step="0.000001"
             placeholder="0.000000"
-            class="input input-bordered w-full max-w-xs"
+            class="input input-bordered text-white w-full max-w-xs"
             id="latitude"
-            v-model="formData.location_attributes.latitude"
+            v-model="formData.latitude"
           />
         </div>
 
