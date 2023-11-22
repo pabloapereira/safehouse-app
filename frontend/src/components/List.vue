@@ -2,16 +2,35 @@
 import api from '../api';
 
 export default {
-  components: {},
+  data() {
+    return {
+      survivors: [],
+    };
+  },
+  created() {
+    this.getSurvivors();
+  },
   methods: {
-    async getData() {
-      console.log('Clicked!');
+    async getSurvivors() {
       try {
-        const response = await api.getData();
-        console.log(response.data);
+        const response = await api.getSurvivors();
+        this.survivors = response.data;
       } catch (error) {
         console.error('Error fetching data:', error);
       }
+    },
+    async deleteSurvivor(id: string) {
+      try {
+        await api.deleteSurvivor(id);
+        this.getSurvivors();
+      } catch (error) {
+        console.error('Error deleting survivor:', error);
+      }
+    },
+  },
+  props: {
+    data: {
+      type: Array,
     },
   },
 };
@@ -29,154 +48,85 @@ export default {
           <!-- head -->
           <thead>
             <tr>
+              <th class="text-black">Edit</th>
               <th>
                 <label>
                   <input type="checkbox" class="checkbox" />
                 </label>
               </th>
               <th class="text-black">Name</th>
-              <th class="text-black">Job</th>
+              <th class="text-black">Location</th>
               <th class="text-black">Is Alive?</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            <!-- row 1 -->
-            <tr>
+            <tr v-for="(survivor, index) in survivors" :key="index">
               <th>
-                <label>
-                  <input type="checkbox" class="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div class="flex items-center gap-3">
-                  <div class="avatar">
-                    <div class="mask mask-squircle w-12 h-12">
-                      <img
-                        src="https://xsgames.co/randomusers/avatar.php?g=male"
-                        alt="Avatar Tailwind CSS Component"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="font-bold">Hart Hagerty</div>
-                    <div class="text-sm opacity-50">United States</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Zemlak, Daniel and Leannon
-                <br />
-                <span class="badge badge-ghost badge-sm"
-                  >Desktop Support Technician</span
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
                 >
-              </td>
-              <td>Yes</td>
-              <th>
-                <button class="btn btn-ghost btn-xs">Delete</button>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
+                  />
+                </svg>
               </th>
-            </tr>
-            <!-- row 2 -->
-            <tr>
-              <th>
+              <td>
                 <label>
-                  <input type="checkbox" class="checkbox" />
+                  <input type="checkbox" class="checkbox checkbox-error" />
                 </label>
-              </th>
+              </td>
               <td>
                 <div class="flex items-center gap-3">
                   <div class="avatar">
                     <div class="mask mask-squircle w-12 h-12">
                       <img
+                        v-if="survivor.gender === 'Male'"
                         src="https://xsgames.co/randomusers/avatar.php?g=male"
                         alt="Avatar Tailwind CSS Component"
                       />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="font-bold">Brice Swyre</div>
-                    <div class="text-sm opacity-50">China</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Carroll Group
-                <br />
-                <span class="badge badge-ghost badge-sm">Tax Accountant</span>
-              </td>
-              <td>Yes</td>
-              <th>
-                <button class="btn btn-ghost btn-xs">Delete</button>
-              </th>
-            </tr>
-            <!-- row 3 -->
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" class="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div class="flex items-center gap-3">
-                  <div class="avatar">
-                    <div class="mask mask-squircle w-12 h-12">
                       <img
-                        src="https://xsgames.co/randomusers/avatar.php?g=male"
+                        v-if="survivor.gender === 'Female'"
+                        src="https://xsgames.co/randomusers/avatar.php?g=female"
                         alt="Avatar Tailwind CSS Component"
                       />
                     </div>
                   </div>
                   <div>
-                    <div class="font-bold">Marjy Ferencz</div>
+                    <div class="font-bold">{{ survivor.name }}</div>
                     <div class="text-sm opacity-50">Russia</div>
                   </div>
                 </div>
               </td>
               <td>
-                Rowe-Schoen
+                <!-- {{ console.log(getLocation(survivor.id)) }} -->
+                <!-- Idea to improve this part
+                1 - App need to load every survivor
+                2 - For every Survivor, get it's location
+                3 - Store location inside Survivor[n]
+                4 - Show it here simply as "survivor.longitude" -->
+                {{ survivor.longitude }}
                 <br />
-                <span class="badge badge-ghost badge-sm"
-                  >Office Assistant I</span
+                <span class="badge badge-ghost badge-sm">{{
+                  survivor.latitude
+                }}</span>
+              </td>
+              <td v-if="survivor.is_alive">Yes</td>
+              <td v-else>No</td>
+              <th>
+                <button
+                  class="btn btn-ghost btn-xs"
+                  @click="deleteSurvivor(survivor.id)"
                 >
-              </td>
-              <td>No</td>
-              <th>
-                <button class="btn btn-ghost btn-xs">Delete</button>
-              </th>
-            </tr>
-            <!-- row 4 -->
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" class="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div class="flex items-center gap-3">
-                  <div class="avatar">
-                    <div class="mask mask-squircle w-12 h-12">
-                      <img
-                        src="https://xsgames.co/randomusers/avatar.php?g=male"
-                        alt="Avatar Tailwind CSS Component"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="font-bold">Yancy Tear</div>
-                    <div class="text-sm opacity-50">Brazil</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Wyman-Ledner
-                <br />
-                <span class="badge badge-ghost badge-sm"
-                  >Community Outreach Specialist</span
-                >
-              </td>
-              <td>Yes</td>
-              <th>
-                <button class="btn btn-ghost btn-xs">Delete</button>
+                  Delete
+                </button>
               </th>
             </tr>
           </tbody>

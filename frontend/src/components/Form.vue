@@ -1,19 +1,38 @@
 <script lang="ts">
-import Button from "./CustomButton.vue";
-import api from "../api";
-
+import Button from './CustomButton.vue';
+import api from '../api';
+// TODO: Refactor all of this to Vue 3
 export default {
   components: {
     Button,
   },
+  data() {
+    return {
+      formData: {
+        name: '',
+        age: null,
+        gender: '',
+        longitude: null,
+        latitude: null,
+        is_alive: true,
+      },
+    };
+  },
+  computed: {
+    isFormValid() {
+      return (
+        this.formData.name && this.formData.age !== null && this.formData.gender
+      );
+    },
+  },
   methods: {
-    async getData() {
-      console.log("Clicked!");
+    async sendData() {
       try {
-        const response = await api.getData();
-        console.log(response.data);
+        console.log(this.formData.longitude);
+        const response = await api.postSurvivor(this.formData);
+        this.$emit('form-data', this.formData);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       }
     },
   },
@@ -35,8 +54,10 @@ export default {
           <input
             type="text"
             placeholder="Rick Grimes"
-            class="input input-bordered w-full max-w-xs"
+            class="input input-bordered text-white w-full max-w-xs text-white"
             id="name"
+            v-model="formData.name"
+            required
           />
         </div>
 
@@ -49,8 +70,10 @@ export default {
             min="1"
             max="120"
             placeholder="30"
-            class="input input-bordered w-full max-w-xs"
+            class="input input-bordered text-white w-full max-w-xs"
             id="age"
+            v-model="formData.age"
+            required
           />
         </div>
 
@@ -58,10 +81,15 @@ export default {
           <label class="label">
             <span class="label-text text-gray-400">Sexo</span>
           </label>
-          <select class="select select-bordered mb-4 text-gray-400" id="gender">
+          <select
+            class="select select-bordered text-white mb-4 text-gray-400"
+            id="gender"
+            v-model="formData.gender"
+            required
+          >
             <option disabled selected>Gênero</option>
-            <option>Feminino</option>
-            <option>Masculino</option>
+            <option value="Female">Feminino</option>
+            <option value="Male">Masculino</option>
           </select>
         </div>
 
@@ -77,8 +105,9 @@ export default {
             max="180.000000"
             step="0.000001"
             placeholder="0.000000"
-            class="input input-bordered w-full max-w-xs"
+            class="input input-bordered text-white w-full max-w-xs"
             id="longitude"
+            v-model="formData.longitude"
           />
         </div>
 
@@ -92,8 +121,9 @@ export default {
             max="90.000000"
             step="0.000001"
             placeholder="0.000000"
-            class="input input-bordered w-full max-w-xs"
-            id="longitude"
+            class="input input-bordered text-white w-full max-w-xs"
+            id="latitude"
+            v-model="formData.latitude"
           />
         </div>
 
@@ -103,7 +133,11 @@ export default {
         </div> -->
       </form>
       <div class="card-actions">
-        <Button @click.prevent="getData" />
+        <Button
+          @click.prevent="sendData"
+          :disabled="!isFormValid"
+          :style="{ opacity: isFormValid ? '1' : '0.5' }"
+        />
       </div>
     </div>
   </div>
