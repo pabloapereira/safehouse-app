@@ -4,7 +4,8 @@
     name: Faker::Name.first_name,
     age: rand(18..99),
     gender: Faker::Gender.binary_type,
-    is_alive: Faker::Boolean.boolean
+    is_alive: Faker::Boolean.boolean,
+    is_archived: false
   )
 
   inventory = Inventory.create(

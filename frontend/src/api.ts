@@ -17,7 +17,11 @@ export default {
   },
 
   deleteSurvivor(index: string) {
-    return apiClient.delete(`survivors/${index}`);
+    const id = {
+      id: index,
+    };
+    const survivor_id = JSON.stringify(id);
+    return apiClient.put(`survivors/${index}/archive`, survivor_id);
   },
 
   updateLocation(
