@@ -9,6 +9,7 @@ class SurvivorsController < ApplicationController
       survivor_last_location = survivor.locations.last
   
       survivor_data = {
+        id: survivor.id,
         name: survivor.name,
         age: survivor.age,
         gender: survivor.gender,
