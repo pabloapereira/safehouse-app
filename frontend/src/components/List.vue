@@ -27,6 +27,40 @@ export default {
         console.error('Error deleting survivor:', error);
       }
     },
+    showEditField(index: number) {
+      const form = document.getElementById('edit-form-' + index);
+      if (form?.classList.contains('hidden')) {
+        form?.classList.remove('hidden');
+        return;
+      }
+      form?.classList.add('hidden');
+    },
+    async updateLocation(
+      survivorId: string,
+      locationId: string,
+      latitude: string,
+      longitude: string,
+      formIndex: number
+    ) {
+      console.log('Trying to update location');
+      const newLocation = {
+        latitude: latitude,
+        longitude: longitude,
+        survivor_id: survivorId,
+      };
+
+      const jsonLocation = JSON.stringify(newLocation);
+      try {
+        await api.updateLocation(survivorId, locationId, jsonLocation);
+        console.log('Location updated!');
+        const form = document.getElementById('edit-form-' + formIndex);
+        form?.classList.add('hidden');
+      } catch (error) {
+        console.error('Error updating location:', error);
+      }
+
+      return;
+    },
   },
   props: {
     data: {
@@ -49,40 +83,32 @@ export default {
           <thead>
             <tr>
               <th class="text-black">Edit</th>
-              <th>
-                <label>
-                  <input type="checkbox" class="checkbox" />
-                </label>
-              </th>
               <th class="text-black">Name</th>
               <th class="text-black">Location</th>
               <th class="text-black">Is Alive?</th>
               <th></th>
             </tr>
           </thead>
-          <tbody>
-            <tr v-for="(survivor, index) in survivors" :key="index">
+          <tbody v-for="(survivor, index) in survivors" :key="index">
+            <tr>
               <th>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
-                  />
-                </svg>
+                <button class="btn" @click="showEditField(index)">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
+                    />
+                  </svg>
+                </button>
               </th>
-              <td>
-                <label>
-                  <input type="checkbox" class="checkbox checkbox-error" />
-                </label>
-              </td>
               <td>
                 <div class="flex items-center gap-3">
                   <div class="avatar">
@@ -106,16 +132,12 @@ export default {
                 </div>
               </td>
               <td>
-                <!-- {{ console.log(getLocation(survivor.id)) }} -->
-                <!-- Idea to improve this part
-                1 - App need to load every survivor
-                2 - For every Survivor, get it's location
-                3 - Store location inside Survivor[n]
-                4 - Show it here simply as "survivor.longitude" -->
-                {{ survivor.longitude }}
+                <span class="badge badge-ghost badge-sm">
+                  {{ survivor.latitude }}
+                </span>
                 <br />
                 <span class="badge badge-ghost badge-sm">{{
-                  survivor.latitude
+                  survivor.longitude
                 }}</span>
               </td>
               <td v-if="survivor.is_alive">Yes</td>
@@ -128,6 +150,40 @@ export default {
                   Delete
                 </button>
               </th>
+            </tr>
+            <tr class="hidden" :id="'edit-form-' + index">
+              <td colspan="2">
+                <input
+                  type="text"
+                  placeholder="Latitude"
+                  class="input input-bordered w-full max-w-xs text-white"
+                  v-model="survivor.latitude"
+                />
+              </td>
+              <td colspan="2">
+                <input
+                  type="text"
+                  placeholder="Longitude"
+                  class="input input-bordered w-full max-w-xs text-white"
+                  v-model="survivor.longitude"
+                />
+              </td>
+              <td colspan="1">
+                <button
+                  class="btn"
+                  @click="
+                    updateLocation(
+                      survivor.id,
+                      survivor.location_id,
+                      survivor.latitude,
+                      survivor.longitude,
+                      index
+                    )
+                  "
+                >
+                  Send
+                </button>
+              </td>
             </tr>
           </tbody>
           <!-- foot -->

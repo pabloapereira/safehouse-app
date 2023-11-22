@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_20_144356) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_22_142531) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,6 +39,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_20_144356) do
     t.datetime "updated_at", null: false
     t.bigint "inventory_id"
     t.bigint "location_id"
+    t.boolean "is_archived"
     t.index ["inventory_id"], name: "index_survivors_on_inventory_id"
     t.index ["location_id"], name: "index_survivors_on_location_id"
   end
