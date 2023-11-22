@@ -1,5 +1,5 @@
 <script lang="ts">
-import api from '../api';
+import api from "../api";
 
 export default {
   data() {
@@ -16,7 +16,7 @@ export default {
         const response = await api.getSurvivors();
         this.survivors = response.data;
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     },
     async deleteSurvivor(id: string) {
@@ -24,16 +24,16 @@ export default {
         await api.deleteSurvivor(id);
         this.getSurvivors();
       } catch (error) {
-        console.error('Error deleting survivor:', error);
+        console.error("Error deleting survivor:", error);
       }
     },
     showEditField(index: number) {
-      const form = document.getElementById('edit-form-' + index);
-      if (form?.classList.contains('hidden')) {
-        form?.classList.remove('hidden');
+      const form = document.getElementById("edit-form-" + index);
+      if (form?.classList.contains("hidden")) {
+        form?.classList.remove("hidden");
         return;
       }
-      form?.classList.add('hidden');
+      form?.classList.add("hidden");
     },
     async updateLocation(
       survivorId: string,
@@ -42,7 +42,7 @@ export default {
       longitude: string,
       formIndex: number
     ) {
-      console.log('Trying to update location');
+      console.log("Trying to update location");
       const newLocation = {
         latitude: latitude,
         longitude: longitude,
@@ -52,14 +52,17 @@ export default {
       const jsonLocation = JSON.stringify(newLocation);
       try {
         await api.updateLocation(survivorId, locationId, jsonLocation);
-        console.log('Location updated!');
-        const form = document.getElementById('edit-form-' + formIndex);
-        form?.classList.add('hidden');
+        console.log("Location updated!");
+        const form = document.getElementById("edit-form-" + formIndex);
+        form?.classList.add("hidden");
       } catch (error) {
-        console.error('Error updating location:', error);
+        console.error("Error updating location:", error);
       }
 
       return;
+    },
+    formatLocation(location: string) {
+      return parseFloat(location).toFixed(6);
     },
   },
   props: {
@@ -127,17 +130,16 @@ export default {
                   </div>
                   <div>
                     <div class="font-bold">{{ survivor.name }}</div>
-                    <div class="text-sm opacity-50">Russia</div>
                   </div>
                 </div>
               </td>
               <td>
                 <span class="badge badge-ghost badge-sm">
-                  {{ survivor.latitude }}
+                  {{ formatLocation(survivor.latitude) }}
                 </span>
                 <br />
                 <span class="badge badge-ghost badge-sm">{{
-                  survivor.longitude
+                  formatLocation(survivor.longitude)
                 }}</span>
               </td>
               <td v-if="survivor.is_alive">Yes</td>

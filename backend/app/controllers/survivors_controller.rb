@@ -55,6 +55,7 @@ class SurvivorsController < ApplicationController
       render json: @survivor.errors, status: :unprocessable_entity
     end
   end
+  
   def archive
     if @survivor.update(is_archived: true)
         render json: @suvivor
@@ -62,6 +63,7 @@ class SurvivorsController < ApplicationController
       render json: @survivor.errors, status: :unprocessable_entity
     end
   end
+
   def destroy
     render json: @survivor.destroy
   end
